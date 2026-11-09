@@ -1,0 +1,147 @@
+# ======================================================================
+# Momentrix Media — Production Apache / LiteSpeed Configuration
+# Optimized for Hostinger Web Hosting
+# ======================================================================
+
+# Default directory index
+DirectoryIndex index.html
+
+# Custom 404 error page
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ----------------------------------------------------------------------
+  # 1. Force HTTPS
+  # ----------------------------------------------------------------------
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # ----------------------------------------------------------------------
+  # 2. Redirect apex domain (momentrixmedia.com) to www (www.momentrixmedia.com)
+  # Matches canonical SEO configuration throughout the codebase
+  # ----------------------------------------------------------------------
+  RewriteCond %{HTTP_HOST} ^momentrixmedia\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.momentrixmedia.com/$1 [L,R=301]
+
+  # ----------------------------------------------------------------------
+  # 3. Normalize: Remove trailing slash from non-directory requests
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} (.+)/+$
+  RewriteRule ^ %1 [R=301,L]
+
+  # ----------------------------------------------------------------------
+  # 4. Redirect direct .html requests to clean URLs
+  # Excludes index.html, 404.html and Google verification files
+  # ----------------------------------------------------------------------
+  RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+([^.]+)\.html [NC]
+  RewriteCond %{REQUEST_URI} !^/(index|404|google[a-zA-Z0-9]+)\.html$ [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # ----------------------------------------------------------------------
+  # 5. Do not rewrite existing physical files (assets, images, scripts)
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # ----------------------------------------------------------------------
+  # 6. Backend API endpoints (/api/*) routed to native PHP handlers
+  # (Must precede prerendered HTML matching and SPA fallback)
+  # ----------------------------------------------------------------------
+  RewriteRule ^api/contact/?$     api/contact.php    [L,QSA]
+  RewriteRule ^api/newsletter/?$  api/newsletter.php [L,QSA]
+  RewriteRule ^api/careers/?$     api/careers.php    [L,QSA]
+  RewriteRule ^api/health/?$      api/health.php     [L,QSA]
+
+  # Block direct browser access to API helper libraries and internal PHP files
+  RewriteRule ^api/(mailer|config|lib) - [F,L]
+
+  # Pass-through for any other /api routes
+  RewriteCond %{REQUEST_URI} ^/api [NC]
+  RewriteRule ^ - [L]
+
+  # ----------------------------------------------------------------------
+  # 7. Serve prerendered HTML routes (e.g. /about -> about.html, /services -> services/index.html)
+  # ----------------------------------------------------------------------
+  # 7a. Check for directory index.html (solves /services and /blog directory conflict on LiteSpeed)
+  RewriteCond %{DOCUMENT_ROOT}/$1/index.html -f
+  RewriteRule ^(.+?)/?$ $1/index.html [L]
+
+  # 7b. Check for matching .html file
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+
+  # ----------------------------------------------------------------------
+  # 8. SPA Fallback for client-side dynamic routing (React Router)
+  # ----------------------------------------------------------------------
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Security: Block access to hidden, environment and sensitive files
+# ----------------------------------------------------------------------
+<FilesMatch "^(\.env|\.git|\.htaccess|\.htpasswd|.*credentials.*|package(-lock)?\.json|tsconfig.*\.json|.*\.log|.*\.bak|.*\.sh)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# ----------------------------------------------------------------------
+# PHP Request Size & Upload Limits (Supports careers resume uploads)
+# ----------------------------------------------------------------------
+<IfModule mod_php.c>
+  php_value post_max_size 16M
+  php_value upload_max_filesize 16M
+  php_value memory_limit 128M
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Security Headers
+# ----------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Browser Caching & Performance
+# ----------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML, XML and JSON: fresh for instant SEO updates
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType application/xml "access plus 0 seconds"
+  ExpiresByType text/xml "access plus 0 seconds"
+  ExpiresByType application/json "access plus 0 seconds"
+
+  # Hashed static Vite assets: cache for 1 year
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ----------------------------------------------------------------------
+# Gzip / Deflate Compression
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+

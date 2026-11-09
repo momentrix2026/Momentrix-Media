@@ -12,9 +12,13 @@ dist
 dist-ssr
 dist-server
 *.local
+*.zip
 .env
 .env.*
 !.env.example
+momentrix_credentials.php
+!momentrix_credentials.example.php
+public/api/config.local.php
 
 # Editor directories and files
 .vscode/*

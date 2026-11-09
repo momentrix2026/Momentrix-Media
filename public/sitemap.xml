@@ -2,92 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.momentrixmedia.com</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/about</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/services</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/services/seo</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/services/social</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/services/web</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/services/performance</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/portfolio</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/case-studies</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/blog</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/careers</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/contact</loc>
-    <lastmod>2026-07-30</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/explore</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/privacy-policy</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.2</priority>
   </url>
   <url>
     <loc>https://www.momentrixmedia.com/terms-of-service</loc>
-    <lastmod>2026-07-30</lastmod>
+    <lastmod>2026-11-09</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/digital-marketing-agency-guntur</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/digital-marketing-agency-vijayawada</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/digital-marketing-agency-hyderabad</loc>
+    <lastmod>2026-11-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/blog/future-of-ai-in-digital-marketing</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/blog/seo-trends-2026</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/blog/instagram-reels-meta-ads-roi</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/blog/b2b-content-strategy-guide</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.momentrixmedia.com/blog/core-web-vitals-why-speed-matters</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

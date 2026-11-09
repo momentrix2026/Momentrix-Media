@@ -52,8 +52,17 @@ let count = 0;
 for (const route of ROUTES) {
   const file = outFile(route.path);
   mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, renderPage(route.path, route));
+  const rendered = renderPage(route.path, route);
+  writeFileSync(file, rendered);
   count += 1;
+
+  // For non-root routes, also write <route>/index.html
+  // Guarantees directory compatibility for parent routes sharing folder names (e.g. /services, /blog)
+  if (route.path !== '/') {
+    const dirIndex = join(DIST, route.path.replace(/^\//, ''), 'index.html');
+    mkdirSync(dirname(dirIndex), { recursive: true });
+    writeFileSync(dirIndex, rendered);
+  }
 }
 
 // 404 page — Vercel serves dist/404.html with HTTP 404 for unknown URLs.
@@ -72,11 +81,10 @@ const urls = ROUTES.filter((r) => !r.noindex)
   })
   .join('\n');
 
-writeFileSync(
-  join(DIST, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
-);
-console.log(`[prerender] sitemap.xml with ${ROUTES.length} URLs`);
+const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+writeFileSync(join(DIST, 'sitemap.xml'), sitemapContent);
+writeFileSync(join(ROOT, 'public', 'sitemap.xml'), sitemapContent);
+console.log(`[prerender] sitemap.xml with ${ROUTES.length} URLs (written to dist and public)`);
 
 // The server bundle is only needed during the build.
 rmSync(SERVER_DIR, { recursive: true, force: true });
